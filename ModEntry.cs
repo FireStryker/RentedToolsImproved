@@ -37,7 +37,7 @@ namespace RentedToolsImproved
 
         private void Bootstrap(object sender, EventArgs e)
         {
-            
+            // params reset
             this.inited = false;
             this.player = null;
             this.blacksmithNPC = null;
@@ -50,7 +50,7 @@ namespace RentedToolsImproved
             this.rentedToolRefs = new Dictionary<Tuple<List<Item>, int>, Item>();
             this.blacksmithCounterTiles = new List<Vector2>();
 
-            
+            // params init
             this.player = Game1.player;
             this.blacksmithCounterTiles.Add(new Vector2(3f, 15f));
             foreach (NPC npc in Utility.getAllCharacters())
@@ -67,7 +67,7 @@ namespace RentedToolsImproved
                 Monitor.Log("blacksmith NPC not found", LogLevel.Info);
             }
 
-            
+            // init done
             this.inited = true;
         }
 
@@ -136,7 +136,8 @@ namespace RentedToolsImproved
 
         private bool HasRentedTools(Farmer who)
         {
-            
+            // Should recycle if:
+            // (there's no tool being upgraded) and (there are tools of the same type)            
             bool result = false;
 
             IList<Item> inventory = who.Items;
@@ -277,24 +278,23 @@ namespace RentedToolsImproved
 
         private void BuyTempTool(Farmer who)
         {
-            //Get tool that is gonna be upgraded
+            // Get tool that is gonna be upgraded
             Item toolToBuy = this.GetRentedToolByTool(GetToolBeingUpgraded(who));
+            
             if (toolToBuy == null)
             {
                 return;
             }
-            //Sets rental tool quality to the quality of the current tool
-            else if (toolToBuy is Tool actual)
-            {
-                actual.UpgradeLevel = GetToolBeingUpgraded(who).upgradeLevel - 1;
-            }
-
+            // Sets rental tool quality to the quality of the current tool
+            // else if (toolToBuy is Tool actual)
+            // {
+            //    actual.UpgradeLevel = GetToolBeingUpgraded(who).upgradeLevel - 1;
+            // }
 
             int toolCost = this.GetToolCost(toolToBuy);
             
             if (who.Money >= toolCost && who.freeSpotsInInventory() > 0)
             {
-                
                 ShopMenu.chargePlayer(who, 0, toolCost);
                 Item item = who.addItemToInventory(toolToBuy);
                 this.shouldCreateSucceededToRentTools = true;
@@ -309,6 +309,7 @@ namespace RentedToolsImproved
         private void RecycleTempTools(Farmer who)
         {
             // recycle all rented tools
+            
             IList<Item> inventory = who.Items;
             List<Tool> tools = inventory
                 .Where(tool => tool is Axe || tool is Pickaxe || tool is WateringCan || tool is Hoe)
