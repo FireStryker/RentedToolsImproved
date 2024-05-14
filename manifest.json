@@ -1,10 +1,10 @@
 ﻿{
 	"Name": "RentedToolsReImproved",
 	"Author": "FireStriker",
-	"Version": "1.0.0",
-	"Description": "Modifyed version of the 'improved' version of the already existing RentedTools mod which changes some things for better QOL",
-	"UniqueID": "SolusCleansing.RentedToolsImproved",
-	"EntryDll": "RentedToolsImproved.dll",
+	"Version": "0.0.1",
+	"Description": "An 'improved' version of the already existing RentedTools mod which changes some things for better QOL",
+	"UniqueID": "FireStriker.RentedToolsReImproved",
+	"EntryDll": "RentedToolsReImproved.dll",
 	"MinimumApiVersion": "3.0.0",
-	"UpdateKeys": [ "Nexus:18909" ]
+	"UpdateKeys": []
 }

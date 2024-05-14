@@ -8,8 +8,10 @@ using StardewValley;
 using StardewValley.Menus;
 using StardewValley.Objects;
 using StardewValley.Tools;
+#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
+#pragma warning disable CS0649 // Field is never assigned to, and will always have its default value null
 
-namespace RentedToolsImproved
+namespace RentedToolsReImproved
 {
    
     public class ModEntry : Mod
@@ -25,7 +27,7 @@ namespace RentedToolsImproved
 
         private Dictionary<Tuple<List<Item>, int>, Item> rentedToolRefs;
         private ITranslationHelper i18n;
-        private List<Vector2> blacksmithCounterTiles = new List<Vector2>();
+        private List<Vector2> blacksmithCounterTiles = new();
 
         public override void Entry(IModHelper helper)
         {
@@ -131,7 +133,7 @@ namespace RentedToolsImproved
 
         private bool IsPlayerAtCounter(Farmer who)
         {
-            return who.currentLocation.Name == "Blacksmith" && this.blacksmithCounterTiles.Contains(who.getTileLocation());
+            return who.currentLocation.Name == "Blacksmith" && this.blacksmithCounterTiles.Contains(who.character.Tile());
         }
 
         private bool HasRentedTools(Farmer who)
